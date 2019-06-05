@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gokubia
+spec:
+  rules:
+  - host: gokubia.exapmle.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: gokubia-nodeport
+          servicePort: 80
+          

@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta2
+kind: ReplicaSet
+metadata:
+  name: gokubia
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - gokubia
+  template:
+    metadata:
+      name: gokubia
+      labels:
+        app: gokubia
+    spec:
+      containers:
+        - name: gokubia
+          image: sealtv/gokubia
+          ports:
+            - containerPort: 8080

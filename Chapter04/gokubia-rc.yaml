@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: gokubia
+spec:
+  replicas: 3
+  selector:
+    app: gokubia
+  template:
+    metadata:
+      name: gokubia
+      labels:
+        app: gokubia
+    spec:
+      containers:
+        - name: gokubia
+          image: sealtv/gokubia
+          ports:
+            - containerPort: 8080

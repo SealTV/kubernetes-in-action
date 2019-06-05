@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu request for container
+      gokubia'
+  creationTimestamp: "2019-05-29T18:58:17Z"
+  generateName: gokubia-
+  labels:
+    run: gokubia
+  name: gokubia-98g7j
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicationController
+    name: gokubia
+    uid: 333fa684-80b5-11e9-9c4b-42010aa600aa
+  resourceVersion: "7779688"
+  selfLink: /api/v1/namespaces/default/pods/gokubia-98g7j
+  uid: b856e53d-8243-11e9-91f9-42010aa60187
+spec:
+  containers:
+  - image: sealtv/gokubia:1.1
+    imagePullPolicy: Always
+    name: gokubia
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+    resources:
+      requests:
+        cpu: 100m
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-f6htc
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  nodeName: gke-kubia-default-pool-6a2169fd-ghdb
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: default-token-f6htc
+    secret:
+      defaultMode: 420
+      secretName: default-token-f6htc
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2019-05-29T18:58:17Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2019-05-29T18:58:17Z"
+    message: 'containers with unready status: [gokubia]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: null
+    message: 'containers with unready status: [gokubia]'
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2019-05-29T18:58:17Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - image: sealtv/gokubia:1.1
+    imageID: ""
+    lastState: {}
+    name: gokubia
+    ready: false
+    restartCount: 0
+    state:
+      waiting:
+        reason: ContainerCreating
+  hostIP: 10.166.0.50
+  phase: Pending
+  podIP: 10.12.37.5
+  qosClass: Burstable
+  startTime: "2019-05-29T18:58:17Z"

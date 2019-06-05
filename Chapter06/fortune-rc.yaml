@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: fortune
+spec:
+  replicas: 1
+  selector:
+    app: fortune
+    name: fortune
+  template:
+    metadata:
+      name: fortune
+      labels:
+        app: fortune
+        name: fortune
+    spec:
+      containers:
+        - name: fortune
+          image: sealtv/fortune
+          ports:
+            - containerPort: 80
+              protocol: TCP
