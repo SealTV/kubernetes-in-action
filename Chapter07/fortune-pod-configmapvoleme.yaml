@@ -3,6 +3,9 @@ kind: Pod
 metadata:
   name: fortune-env-from-configmap
 spec:
+  # automountServiceAccountToken: false
+  imagePullSecrets:
+    - name: dockerhubsecret
   containers:
   - image: sealtv/fortune:env
     name: fortune-env
@@ -16,6 +19,11 @@ spec:
           configMapKeyRef:
             name: fortune-config
             key: sleep-interval
+      - name: FOO_SECRET
+        valueFrom:
+          secretKeyRef:
+            key: foo
+            name: fortune-https
     volumeMounts:
       - name: html
         mountPath: /var/htdocs
@@ -28,9 +36,10 @@ spec:
         readOnly: true
       - name: config
         mountPath: /etc/nginx/conf.d
-        readOnly: true
-        
-      
+        readOnly: true 
+      - name: certs
+        mountPath: /etc/nginx/certs/
+        readOnly: true     
     resources:
       limits:
         memory: "128Mi"
@@ -48,4 +57,7 @@ spec:
         items:
           - key: my-ngix-config.conf
             path: gzip.conf
-        defaultMode: 6600
+        defaultMode: 0666
+    - name: certs
+      secret:
+        secretName: fortune-https
