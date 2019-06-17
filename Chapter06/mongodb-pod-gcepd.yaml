@@ -19,7 +19,3 @@ spec:
     ports:
       - containerPort: 27017
         protocol: TCP
-    resources:
-      limits:
-        memory: "600Mi"
-        cpu: "100m"
